@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', #Heroku追加
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -83,6 +84,8 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
+        #'ENGINE': 'django.db.backends.mysql', #Herokuのデータベースに関する設定
+        
         'ENGINE': 'django.db.backends.mysql', #mysqlをデータベースとして使用することを指定
         'NAME': 'mysite', #データベース名
         'USER': 'DBuser', #データベースを作成したユーザー名
@@ -130,3 +133,23 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#Herokuに関する設定
+import dj_database_url #追加
+#EBUG = False
+#ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
+#STATIC_ROOT = BASE_DIR / "staticfiles"
+#try:
+#    from .local_settings import *
+#except ImportError:
+#    pass
+
+#if not DEBUG:
+#    SECRET_KEY = os.environ['SECRET_KEY']
+#    import django_heroku
+#    django_heroku.settings(locals())
+
+#    db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
+#    DATABASES['default'].update(db_from_env)
+    
+    
