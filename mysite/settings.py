@@ -26,7 +26,7 @@ SECRET_KEY = '7b$o)ja+)q)0s(mn!ma3kgq+w#o1=qp5)_+5h!+p@g!g0t3xah'
 DEBUG = True
 
 ALLOWED_HOSTS = ['b22e4b662b2b4e9aac0f35f7991f06fa.vfs.cloud9.ap-northeast-1.amazonaws.com']
-
+CSRF_TRUSTED_ORIGINS = ['https://b22e4b662b2b4e9aac0f35f7991f06fa.vfs.cloud9.ap-northeast-1.amazonaws.com']
 
 # Application definition
 
