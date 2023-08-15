@@ -19,4 +19,4 @@ DATABASES = {
     }
 }
 
-DEBUG = True #ローカルでDebugできるようになります。
+DEBUG = True #ローカルでDebugできるようにする。
