@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '7b$o)ja+)q)0s(mn!ma3kgq+w#o1=qp5)_+5h!+p@g!g0t3xah'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
 
 ALLOWED_HOSTS = ['b22e4b662b2b4e9aac0f35f7991f06fa.vfs.cloud9.ap-northeast-1.amazonaws.com']
 CSRF_TRUSTED_ORIGINS = ['https://b22e4b662b2b4e9aac0f35f7991f06fa.vfs.cloud9.ap-northeast-1.amazonaws.com']
@@ -84,9 +84,9 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        #'ENGINE': 'django.db.backends.mysql', #Herokuのデータベースに関する設定
+        'ENGINE': 'django.db.backends.mysql', #Herokuのデータベースに関する設定
         
-        'ENGINE': 'django.db.backends.mysql', #mysqlをデータベースとして使用することを指定
+        #'ENGINE': 'django.db.backends.mysql', #mysqlをデータベースとして使用することを指定
         'NAME': 'mysite', #データベース名
         'USER': 'DBuser', #データベースを作成したユーザー名
         'PASSWORD': 'DBuser-24', #ログインするためのパスワード
@@ -136,20 +136,20 @@ STATIC_URL = '/static/'
 
 #Herokuに関する設定
 import dj_database_url #追加
-#DEBUG = False
-#ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
-#STATIC_ROOT = BASE_DIR / "staticfiles"
-#try:
-#    from .local_settings import *
-#except ImportError:
-#    pass
+DEBUG = False
+ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
+STATIC_ROOT = BASE_DIR / "staticfiles"
+try:
+    from .local_settings import *
+except ImportError:
+    pass
 
-#if not DEBUG:
-#    SECRET_KEY = os.environ['SECRET_KEY']
-#    import django_heroku
-#    django_heroku.settings(locals())
+if not DEBUG:
+    SECRET_KEY = os.environ['SECRET_KEY']
+    import django_heroku
+    django_heroku.settings(locals())
 
-#    db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
-#    DATABASES['default'].update(db_from_env)
+    db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
+    DATABASES['default'].update(db_from_env)
     
     
