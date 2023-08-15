@@ -136,7 +136,7 @@ STATIC_URL = '/static/'
 
 #Herokuに関する設定
 import dj_database_url #追加
-#EBUG = False
+#DEBUG = False
 #ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 #STATIC_ROOT = BASE_DIR / "staticfiles"
 #try:
