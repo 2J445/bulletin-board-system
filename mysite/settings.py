@@ -43,7 +43,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware', #Heroku追加
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -84,9 +83,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', #Herokuのデータベースに関する設定
-        
-        #'ENGINE': 'django.db.backends.mysql', #mysqlをデータベースとして使用することを指定
+        'ENGINE': 'django.db.backends.mysql', #mysqlをデータベースとして使用することを指定
         'NAME': 'mysite', #データベース名
         'USER': 'DBuser', #データベースを作成したユーザー名
         'PASSWORD': 'DBuser-24', #ログインするためのパスワード
@@ -132,26 +129,40 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # heroku追記
 STATIC_URL = '/static/'
 
-#Herokuに関する設定
-import dj_database_url #追加
+# heroku追記
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+#heroku用設定
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql', #mysqlをデータベースとして使用することを指定
+        'NAME': 'mysite', #データベース名
+        'USER': 'DBuser', #データベースを作成したユーザー名
+        'PASSWORD': 'DBuser-24', #ログインするためのパスワード
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+}
+
+# heroku追記
+import dj_database_url
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
+
+ALLOWED_HOSTS = ["https://message-board-portfolio-6c061f2f5c3b.herokuapp.com/"]
+
 DEBUG = False
-ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
-#PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-#STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
-STATIC_ROOT = BASE_DIR / "staticfiles"
+
 try:
-    from .local_settings import *
+    from config.local_settings import *
 except ImportError:
     pass
 
 if not DEBUG:
-    SECRET_KEY = os.environ['SECRET_KEY']
     import django_heroku
     django_heroku.settings(locals())
-
-    db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
-    DATABASES['default'].update(db_from_env)
-    
-    

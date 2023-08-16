@@ -19,4 +19,6 @@ DATABASES = {
     }
 }
 
+ALLOWED_HOSTS = ['b22e4b662b2b4e9aac0f35f7991f06fa.vfs.cloud9.ap-northeast-1.amazonaws.com']
+
 DEBUG = True #ローカルでDebugできるようにする。
