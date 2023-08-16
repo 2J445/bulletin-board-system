@@ -25,7 +25,7 @@ SECRET_KEY = '7b$o)ja+)q)0s(mn!ma3kgq+w#o1=qp5)_+5h!+p@g!g0t3xah'
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
 
-ALLOWED_HOSTS = ['b22e4b662b2b4e9aac0f35f7991f06fa.vfs.cloud9.ap-northeast-1.amazonaws.com']
+#ALLOWED_HOSTS = ['b22e4b662b2b4e9aac0f35f7991f06fa.vfs.cloud9.ap-northeast-1.amazonaws.com']
 CSRF_TRUSTED_ORIGINS = ['https://b22e4b662b2b4e9aac0f35f7991f06fa.vfs.cloud9.ap-northeast-1.amazonaws.com']
 
 # Application definition
@@ -138,6 +138,8 @@ STATIC_URL = '/static/'
 import dj_database_url #追加
 DEBUG = False
 ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
+#PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+#STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 STATIC_ROOT = BASE_DIR / "staticfiles"
 try:
     from .local_settings import *
