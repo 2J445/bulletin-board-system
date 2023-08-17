@@ -150,19 +150,35 @@ DATABASES = {
 }
 
 # heroku追記
-import dj_database_url
-db_from_env = dj_database_url.config()
-DATABASES['default'].update(db_from_env)
-
-ALLOWED_HOSTS = ["https://message-board-portfolio-6c061f2f5c3b.herokuapp.com/"]
-
 DEBUG = False
 
 try:
-    from config.local_settings import *
+    # 存在する場合、ローカルの設定読み込み
+    from .settings_local import *
 except ImportError:
     pass
 
 if not DEBUG:
+    # Heroku settings
+
+    # staticの設定
+    import os
     import django_heroku
+
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+    # Static files (CSS, JavaScript, Images)
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATIC_URL = '/static/'
+
+    # Extra places for collectstatic to find static files.
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, 'static'),
+    )
+
+    MIDDLEWARE += [
+        'whitenoise.middleware.WhiteNoiseMiddleware',
+    ]
+
+    # HerokuのConfigを読み込み
     django_heroku.settings(locals())
